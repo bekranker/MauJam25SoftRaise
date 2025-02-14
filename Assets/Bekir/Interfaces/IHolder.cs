@@ -7,4 +7,5 @@ public interface IHolder
     public bool CheckEmpty(int index);
     public int GetIndex(IHoldObject holdObject);
     public bool IsAllBusy();
+    public void SetEmpty(int index);
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class Holder : MonoBehaviour, IHolder
     public List<IHoldObject> _gridsToMove = new();
     [SerializeField] private List<Transform> _points;
     public Dictionary<int, IHoldObject> _holdObjects = new();
+    public event Action OnFullEmpty, OnOneEmpty;
     private int _index = 0;
     /// <summary>
     /// adding 
@@ -18,6 +20,10 @@ public class Holder : MonoBehaviour, IHolder
 
         spawnedObject.transform.position = _points[_index].position;
         _holdObjects.Add(_index, spawnedObject.GetComponent<IHoldObject>());
+        if (spawnedObject.TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            enemy.MyIndex = _index;
+        }
         _index++;
     }
 
@@ -59,5 +65,19 @@ public class Holder : MonoBehaviour, IHolder
         }
 
         return true;
+    }
+
+    public void SetEmpty(int index)
+    {
+        if (!_holdObjects.ContainsKey(index)) return;
+
+        if (_holdObjects.Count == 1)
+        {
+            _holdObjects.Remove(index);
+            OnFullEmpty?.Invoke();
+            return;
+        }
+        _holdObjects.Remove(index);
+        OnOneEmpty?.Invoke();
     }
 }
