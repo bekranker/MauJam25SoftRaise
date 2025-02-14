@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaveSystem : MonoBehaviour
@@ -10,7 +9,7 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private Spawner _spawner;
     [SerializeField] private TMP_Text _waveTMP;
     [SerializeField] private List<EnemyPackSCB> _enemyPacks = new();
-    private int _waveIndex, _packIndex, _enemyIndex;
+    private int _waveIndex, _packIndex;
     private int _count;
 
     public void ChangeDayState(Day day)
@@ -55,9 +54,13 @@ public class WaveSystem : MonoBehaviour
     /// <returns></returns>
     private List<EnemyPackSCB> GetEnemies()
     {
-        if (_count <= 0) return null;
+        if (_count <= 0)
+        {
+            return new List<EnemyPackSCB>();
+        }
         List<EnemyPackSCB> recursiveTotalPack = new();
-        int randCountOfEnemyForAPack = Random.Range(0, 5);
+        int randCountOfEnemyForAPack = 0;
+        randCountOfEnemyForAPack = Random.Range(1, _count + 1);
         recursiveTotalPack.Add(_enemyPacks[randCountOfEnemyForAPack]);
         _count -= randCountOfEnemyForAPack;
         Debug.Log(" before if > 0" + _count);

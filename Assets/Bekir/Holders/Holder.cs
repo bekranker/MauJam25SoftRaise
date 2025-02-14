@@ -80,4 +80,9 @@ public class Holder : MonoBehaviour, IHolder
         _holdObjects.Remove(index);
         OnOneEmpty?.Invoke();
     }
+
+    public IHoldObject GetFirstOne()
+    {
+        return _holdObjects[0];
+    }
 }

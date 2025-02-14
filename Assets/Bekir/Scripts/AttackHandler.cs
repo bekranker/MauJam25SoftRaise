@@ -1,14 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class AttackHandler : MonoBehaviour
 {
     [SerializeField] private Holder _enemyHolder;
     [SerializeField] private Holder _playerHolder;
     [SerializeField] private float _timer;
 
+
+
     private float _timeCounter;
+
+
     public void Init()
     {
         _timeCounter = _timer;
@@ -20,5 +23,6 @@ public class AttackHandler : MonoBehaviour
     {
 
         yield return new WaitForSeconds(_timer);
+
     }
 }

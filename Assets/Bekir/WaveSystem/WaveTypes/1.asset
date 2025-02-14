@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea22e6bb1d9ca4e6a8855b10f1c47c08, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  MaxEnemyCount: 9
+  MaxEnemyCount: 3
   WaveName: Wave 1
