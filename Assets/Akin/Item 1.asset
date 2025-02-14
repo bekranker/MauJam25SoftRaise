@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7138d13dcc0ef3149b03424f99742b29, type: 3}
   m_Name: Item 1
   m_EditorClassIdentifier: 
-  assetSprite: {fileID: 0}
+  assetSprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   Price: 5
   itemType: 0
+  PhaseNumber: 0

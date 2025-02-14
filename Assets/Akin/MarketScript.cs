@@ -6,7 +6,7 @@ public class MarketScript : MonoBehaviour
     [SerializeField] List<GameObject> ObjectSale;
     void Start()
     {
-        
+        ObjectRandomLister();
     }
 
     // Update is called once per frame
@@ -19,7 +19,8 @@ public class MarketScript : MonoBehaviour
         for(int i = 0; i< MarketPoints.Count; i++)
         {
             int RandomSelection = Random.Range(0, ObjectSale.Count);
-            Instantiate(ObjectSale[RandomSelection], MarketPoints[i].transform);
+            GameObject createdObject= Instantiate(ObjectSale[RandomSelection]);
+            createdObject.transform.position = MarketPoints[i].transform.position;
         }
     }
 }

@@ -40,7 +40,11 @@ public class DragAndDrop : MonoBehaviour
         gameObject.transform.position = objectInventoryPosition;
 
         if (isObjectTaken && !ObjectItemControlCode.objestIsTaken && CoinCode.instance.Coin>= ObjectItemControlCode.itemSettings.Price)
+        {
+            collidedTile.GetComponent<InventoryCode>().isFull = true;
             ObjectItemControlCode.ItemTaken();
+        }
+          
 
         if (isRecyle)
         {
@@ -66,7 +70,6 @@ public class DragAndDrop : MonoBehaviour
                 objectInventoryPosition = collision.transform.position;
                 objectStartPosition = collision.transform.position;
                 collidedTile = collision;
-                collidedTile.GetComponent<InventoryCode>().isFull = true;
                 isObjectTaken = true;
             }
             
@@ -104,11 +107,6 @@ public class DragAndDrop : MonoBehaviour
            
 
     }
-
-
-
-
-
     private Vector3 GetMouseWorldPosition()
     {
         Vector3 mousePoint = Input.mousePosition;
