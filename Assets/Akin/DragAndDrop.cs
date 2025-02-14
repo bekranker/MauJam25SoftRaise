@@ -36,18 +36,22 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Inventory")
+        if (collision.gameObject.tag == "Inventory" )
         {
-            //isInventorydedect = true;
-            objectInventoryPosition = collision.transform.position;
+            if (!collision.GetComponent<InventoryCode>().isFull)
+            {
+                objectInventoryPosition = collision.transform.position;
+                collision.GetComponent<InventoryCode>().isFull = true;
+            }
+            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Inventory")
         {
-           //isInventorydedect = false;
             objectInventoryPosition = objectStartPosition;
+            collision.GetComponent<InventoryCode>().isFull = false;
         }
     }
 
