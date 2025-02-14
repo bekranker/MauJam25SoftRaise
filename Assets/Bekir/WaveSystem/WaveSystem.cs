@@ -8,7 +8,6 @@ public class WaveSystem : MonoBehaviour
     {
         Day = day;
     }
-
 }
 public enum Day
 {

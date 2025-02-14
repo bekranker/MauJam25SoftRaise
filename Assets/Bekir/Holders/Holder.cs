@@ -7,7 +7,20 @@ public class Holder : MonoBehaviour, IHolder
     [SerializeField] private List<Transform> _points;
     public Dictionary<int, IHoldObject> _holdObjects = new();
     private int _index = 0;
-    private IHoldObject _holdObject;
+    /// <summary>
+    /// adding 
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="holdObject"></param>
+    public void Add(GameObject spawnedObject)
+    {
+        if (_index == 5) return;
+
+        spawnedObject.transform.position = _points[_index].position;
+        _holdObjects.Add(_index, spawnedObject.GetComponent<IHoldObject>());
+        _index++;
+    }
+
     /// <summary>
     /// eğer dictionary boş değilse true döndürür
     /// </summary>
@@ -28,14 +41,14 @@ public class Holder : MonoBehaviour, IHolder
         }
         return 0;
     }
-    public int SetIndex(int index)
+
+    public bool IsAllBusy()
     {
-        _index = index;
-        return _index;
-    }
-    public IHoldObject SetNPC(IHoldObject holdObject)
-    {
-        _holdObject = holdObject;
-        return _holdObject;
+        foreach (var item in _holdObjects)
+        {
+            if (item.Value == null) return false;
+        }
+        if (_holdObjects.Count == 0) return false;
+        return true;
     }
 }
