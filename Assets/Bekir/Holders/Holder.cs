@@ -3,8 +3,6 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 public class Holder : MonoBehaviour, IHolder
 {
-
-
     [ShowInInspector] // Odin ile Dictionary'yi Inspector'da göster
     public Dictionary<int, IHoldObject> _gridsToMove = new();
 
