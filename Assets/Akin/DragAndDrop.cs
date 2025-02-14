@@ -8,8 +8,7 @@ public class DragAndDrop : MonoBehaviour
     private Vector2 objectInventoryPosition;
 
     bool isObjectTaken;
-
-    bool isInventorydedect;
+    bool isRecyle;
     private void Start()
     {
         objectStartPosition = transform.position;
@@ -35,8 +34,15 @@ public class DragAndDrop : MonoBehaviour
         isDragging = false;
         gameObject.transform.position = objectInventoryPosition;
 
-        if(isObjectTaken)
+        if(isObjectTaken /*&& CoinCode.instance.Coin> So Codu yerleþtir */)
             CoinCode.instance.TakeObject(5);
+
+        if (isRecyle)
+        {
+            CoinCode.instance.SellObject(5);
+            Destroy(gameObject);
+        }
+           
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,14 +57,23 @@ public class DragAndDrop : MonoBehaviour
             }
             
         }
+
+        if(collision.gameObject.tag == "Recycle")
+        {
+            isRecyle = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Inventory")
         {
+            isObjectTaken = false;
             objectInventoryPosition = objectStartPosition;
             collision.GetComponent<InventoryCode>().isFull = false;
         }
+
+        if (collision.gameObject.tag == "Recycle")
+            isRecyle = false;
     }
 
 
