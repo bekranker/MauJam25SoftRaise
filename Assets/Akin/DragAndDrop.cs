@@ -7,6 +7,8 @@ public class DragAndDrop : MonoBehaviour
     private Vector2 objectStartPosition;
     private Vector2 objectInventoryPosition;
 
+    bool isObjectTaken;
+
     bool isInventorydedect;
     private void Start()
     {
@@ -32,6 +34,9 @@ public class DragAndDrop : MonoBehaviour
     {
         isDragging = false;
         gameObject.transform.position = objectInventoryPosition;
+
+        if(isObjectTaken)
+            CoinCode.instance.TakeObject(5);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,6 +47,7 @@ public class DragAndDrop : MonoBehaviour
             {
                 objectInventoryPosition = collision.transform.position;
                 collision.GetComponent<InventoryCode>().isFull = true;
+                isObjectTaken = true;
             }
             
         }

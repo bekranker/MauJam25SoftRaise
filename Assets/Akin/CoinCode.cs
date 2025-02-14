@@ -8,7 +8,8 @@ public class CoinCode : MonoBehaviour
     public TextMeshProUGUI CoinText;
     void Start()
     {
-        
+        if (instance == null)
+            instance = this;
     }
 
     void Update()

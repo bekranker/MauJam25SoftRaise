@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b27cd273b1395248a14471f6754aacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Coin: 100
+  Coin: 50
   CoinText: {fileID: 679087025}
 --- !u!1 &156680169
 GameObject:
