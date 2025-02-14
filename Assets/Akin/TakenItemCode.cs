@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class TakenItemCode : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool objestIsTaken;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ItemTaken()
     {
-        
+        CoinCode.instance.TakeObject(5);
+        objestIsTaken = true;
+    }
+    public void ItemSell()
+    {
+        CoinCode.instance.SellObject(5);
+        Destroy(gameObject);
     }
 }

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class DragAndDrop : MonoBehaviour
 {
     private Vector3 offset;
@@ -9,10 +9,14 @@ public class DragAndDrop : MonoBehaviour
 
     bool isObjectTaken;
     bool isRecyle;
+
+    public TakenItemCode ObjectItemControlCode;
+    
     private void Start()
     {
         objectStartPosition = transform.position;
         objectInventoryPosition = objectStartPosition;
+        ObjectItemControlCode = GetComponent<TakenItemCode>();
     }
     void OnMouseDown()
     {
@@ -34,13 +38,12 @@ public class DragAndDrop : MonoBehaviour
         isDragging = false;
         gameObject.transform.position = objectInventoryPosition;
 
-        if(isObjectTaken /*&& CoinCode.instance.Coin> So Codu yerleþtir */)
-            CoinCode.instance.TakeObject(5);
+        if (isObjectTaken && !ObjectItemControlCode.objestIsTaken /*&& CoinCode.instance.Coin> So Codu yerleþtir */ )
+            ObjectItemControlCode.ItemTaken();
 
         if (isRecyle)
         {
-            CoinCode.instance.SellObject(5);
-            Destroy(gameObject);
+            ObjectItemControlCode.ItemSell();
         }
            
     }
