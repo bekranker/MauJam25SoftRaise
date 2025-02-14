@@ -4,6 +4,7 @@ public class TakenItemCode : MonoBehaviour
 {
     public bool objestIsTaken;
     public ItemSO itemSettings;
+    public DragAndDrop itemDropData;
     void Start()
     {
         
@@ -23,5 +24,9 @@ public class TakenItemCode : MonoBehaviour
     {
         //Slave buff interface;
     }
+
+    
+
+
 
 }
