@@ -2,8 +2,9 @@ using UnityEngine;
 
 public interface IHolder
 {
-    public IHoldObject SetNPC(IHoldObject holdObject);
+
+    public void Add(GameObject spawnedObject);
     public bool CheckEmpty(int index);
-    public int SetIndex(int index);
     public int GetIndex(IHoldObject holdObject);
+    public bool IsAllBusy();
 }
