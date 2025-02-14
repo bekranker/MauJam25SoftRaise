@@ -18,4 +18,9 @@ public class TakenItemCode : MonoBehaviour
         CoinCode.instance.SellObject(5);
         Destroy(gameObject);
     }
+    public void CharacterBuff(GameObject Slave)
+    {
+        //Slave buff interface;
+    }
+
 }

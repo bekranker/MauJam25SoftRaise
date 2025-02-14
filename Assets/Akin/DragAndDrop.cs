@@ -9,7 +9,7 @@ public class DragAndDrop : MonoBehaviour
 
     bool isObjectTaken;
     bool isRecyle;
-
+    GameObject ChosenSlave;
     public TakenItemCode ObjectItemControlCode;
     
     private void Start()
@@ -45,6 +45,13 @@ public class DragAndDrop : MonoBehaviour
         {
             ObjectItemControlCode.ItemSell();
         }
+
+        if(ChosenSlave != null) 
+        {
+            ObjectItemControlCode.CharacterBuff(ChosenSlave);
+            ChosenSlave = null;
+        }
+
            
     }
 
@@ -55,6 +62,7 @@ public class DragAndDrop : MonoBehaviour
             if (!collision.GetComponent<InventoryCode>().isFull)
             {
                 objectInventoryPosition = collision.transform.position;
+                objectStartPosition = collision.transform.position;
                 collision.GetComponent<InventoryCode>().isFull = true;
                 isObjectTaken = true;
             }
@@ -65,6 +73,14 @@ public class DragAndDrop : MonoBehaviour
         {
             isRecyle = true;
         }
+
+        if(collision.gameObject.tag == "Slaves")
+        {
+            ChosenSlave = collision.gameObject;
+        }
+
+
+       
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -77,6 +93,11 @@ public class DragAndDrop : MonoBehaviour
 
         if (collision.gameObject.tag == "Recycle")
             isRecyle = false;
+
+        if(collision.gameObject.tag == "Slaves")
+        {
+            ChosenSlave = null;
+        }
     }
 
 

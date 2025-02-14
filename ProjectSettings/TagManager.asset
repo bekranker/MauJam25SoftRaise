@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Inventory
   - Recycle
+  - Slave
   layers:
   - Default
   - TransparentFX

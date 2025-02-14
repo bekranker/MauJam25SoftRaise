@@ -26,4 +26,6 @@ public class CoinCode : MonoBehaviour
     {
         Coin = Coin + (Price / 2);
     }
+
+   
 }

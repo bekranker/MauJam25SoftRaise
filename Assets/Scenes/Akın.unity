@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 29347351}
   - component: {fileID: 29347354}
   - component: {fileID: 29347355}
+  - component: {fileID: 29347356}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -151,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646edfa37e57df943a741c9c8a9a69fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectItemControlCode: {fileID: 0}
 --- !u!212 &29347352
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -294,6 +296,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &29347356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29347350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ae4c5607646a74a9bd479bd353bd4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objestIsTaken: 0
 --- !u!1 &31276614
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +368,7 @@ GameObject:
   - component: {fileID: 156680172}
   - component: {fileID: 156680171}
   - component: {fileID: 156680170}
+  - component: {fileID: 156680175}
   m_Layer: 0
   m_Name: Square (2)
   m_TagString: Untagged
@@ -445,6 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646edfa37e57df943a741c9c8a9a69fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectItemControlCode: {fileID: 0}
 --- !u!212 &156680173
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -515,6 +532,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &156680175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156680169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ae4c5607646a74a9bd479bd353bd4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objestIsTaken: 0
 --- !u!1 &167523403
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +644,7 @@ GameObject:
   - component: {fileID: 225387615}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Slave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
