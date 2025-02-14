@@ -1,21 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
+
 public class Holder : MonoBehaviour, IHolder
 {
-    [ShowInInspector] // Odin ile Dictionary'yi Inspector'da göster
-    public Dictionary<int, IHoldObject> _gridsToMove = new();
-
+    public List<IHoldObject> _gridsToMove = new();
+    [SerializeField] private List<Transform> _points;
+    public Dictionary<int, IHoldObject> _holdObjects = new();
     private int _index = 0;
     private IHoldObject _holdObject;
-    public bool CheckEmpty()
+    /// <summary>
+    /// eğer dictionary boş değilse true döndürür
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public bool CheckEmpty(int index)
     {
-        return _holdObject != null;
+        return _holdObjects[index] != null;
     }
-
-    public int GetIndex()
+    public int GetIndex(IHoldObject holdObject)
     {
-        return _index;
+        foreach (KeyValuePair<int, IHoldObject> holdobject in _holdObjects)
+        {
+            if (holdObject == holdobject.Value)
+            {
+                return holdobject.Key;
+            }
+        }
+        return 0;
     }
     public int SetIndex(int index)
     {
