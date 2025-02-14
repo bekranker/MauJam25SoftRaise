@@ -303,7 +303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 31276616}
-  - component: {fileID: 31276615}
+  - component: {fileID: 31276617}
   m_Layer: 0
   m_Name: CoinManager
   m_TagString: Untagged
@@ -311,20 +311,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &31276615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31276614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f621c560f07c384b8f3412a6e346fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Coin: 0
-  CoinText: {fileID: 679087025}
 --- !u!4 &31276616
 Transform:
   m_ObjectHideFlags: 0
@@ -340,6 +326,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &31276617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31276614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b27cd273b1395248a14471f6754aacc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Coin: 100
+  CoinText: {fileID: 679087025}
 --- !u!1 &156680169
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,7 +905,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 394397821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1e85bcd2e90a94392c194bc20abb89, type: 3}
+  m_Script: {fileID: 11500000, guid: 59a16401556daa24fad6b8cbc479445f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MarketPoints:
@@ -918,16 +918,7 @@ MonoBehaviour:
   - {fileID: 1830176262}
   - {fileID: 438856701}
   - {fileID: 1825078914}
-  ObjectSale:
-  - {fileID: 1978160780}
-  - {fileID: 418244056}
-  - {fileID: 786579314}
-  - {fileID: 2135000875}
-  - {fileID: 644839320}
-  - {fileID: 167523403}
-  - {fileID: 1830176262}
-  - {fileID: 438856701}
-  - {fileID: 1825078914}
+  ObjectSale: []
 --- !u!1 &418244056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,8 +1581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f621c560f07c384b8f3412a6e346fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Coin: 0
-  CoinText: {fileID: 0}
 --- !u!1 &774062543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2243,7 +2232,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1149967180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593998ab7053e7f4c9e39c6f57d5540c, type: 3}
+  m_Script: {fileID: 11500000, guid: b150fc7e2181efb4d9b04580bd2826a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isFull: 0
@@ -2492,7 +2481,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
 --- !u!114 &1440896410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3217,6 +3206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a3ad80ca83c4deca577345708f0fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _points: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
