@@ -44,11 +44,20 @@ public class Holder : MonoBehaviour, IHolder
 
     public bool IsAllBusy()
     {
-        foreach (var item in _holdObjects)
-        {
-            if (item.Value == null) return false;
-        }
         if (_holdObjects.Count == 0) return false;
+
+        if (_holdObjects.Count == 5)
+        {
+            foreach (var item in _holdObjects)
+            {
+                if (item.Value == null) return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
         return true;
     }
 }
