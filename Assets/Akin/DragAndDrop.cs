@@ -38,7 +38,7 @@ public class DragAndDrop : MonoBehaviour
         isDragging = false;
         gameObject.transform.position = objectInventoryPosition;
 
-        if (isObjectTaken && !ObjectItemControlCode.objestIsTaken /*&& CoinCode.instance.Coin> So Codu yerleþtir */ )
+        if (isObjectTaken && !ObjectItemControlCode.objestIsTaken && CoinCode.instance.Coin>= ObjectItemControlCode.itemSettings.Price)
             ObjectItemControlCode.ItemTaken();
 
         if (isRecyle)
