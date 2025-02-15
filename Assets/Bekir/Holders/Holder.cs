@@ -11,9 +11,6 @@ public class Holder : MonoBehaviour, IHolder
 
     private int _index = 0;
 
-    void Start()
-    {
-    }
     public Transform GetTransform(int index) => _points[index];
     /// <summary>
     /// adding 
@@ -28,7 +25,7 @@ public class Holder : MonoBehaviour, IHolder
         _holdObjects.Add(_index, spawnedObject.GetComponent<IHoldObject>());
         _index++;
     }
-    void ShiftIndicesBack()
+    public void ShiftIndicesBack()
     {
         if (_holdObjects.Count == 0)
             return;
@@ -39,17 +36,12 @@ public class Holder : MonoBehaviour, IHolder
         // Dictionary'yi temizle
         _holdObjects.Clear();
 
-        // Elemanları yeni indekslerle geri ekle
         for (int i = 0; i < tempList.Count; i++)
         {
-            int newKey = 0;
-            if (newKey > 0)
-                newKey = i - 1;
-            if (newKey >= 0) // Eğer yeni indeks negatif değilse ekle
-            {
-                _holdObjects[newKey] = tempList[i].Value;
-                _holdObjects[newKey].RootGameObject.transform.DOMove(_points[newKey].position, .3f);
-            }
+            int newKey = i;
+            // Eğer yeni indeks negatifse, elemanı en sona taşı
+            _holdObjects[newKey] = tempList[i].Value;
+            tempList[i].Value.RootGameObject.transform.position = _points[newKey].position;
         }
     }
     /// <summary>
@@ -104,6 +96,7 @@ public class Holder : MonoBehaviour, IHolder
         }
         _holdObjects.Remove(index);
         OnOneEmpty?.Invoke();
+        ShiftIndicesBack();
     }
 
     public GameObject GetFirstOne()

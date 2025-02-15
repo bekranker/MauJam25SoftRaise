@@ -13,6 +13,7 @@ public class AttackHandler : MonoBehaviour
 
     public void Init()
     {
+        AttackList.RemoveAll(item => item == null);
         StartCoroutine(AttackIE());
     }
     private IEnumerator AttackIE()
@@ -20,7 +21,8 @@ public class AttackHandler : MonoBehaviour
         yield return new WaitForSeconds(_timer);
         AttackList?.ForEach((item) =>
         {
-            item.AttackAnimation();
+            if (item != null)
+                item.AttackAnimation();
         });
         Init();
     }

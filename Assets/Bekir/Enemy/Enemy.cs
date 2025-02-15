@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
     {
         //para düsürme;
         OnDie?.Invoke();
-        _enemyHolder.SetEmpty(MyIndex);
+        OnMove();
         Destroy(gameObject);
     }
     private void ChangeVisual()
@@ -71,26 +71,31 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
 
     public void OnMove()
     {
-        _moving = true;
+        _enemyHolder.SetEmpty(MyIndex);
     }
-
     public void AttackAnimation()
     {
-        if (_moving) return;
-        DOTween.Kill(transform);
-        if (_enemySCB.EnemyTypes == EnemyTypes.Melee)
+        IDamage playerIDamage = _playerHolder.GetFirstOne().GetComponent<IDamage>();
+        if (_spriteRenderer == null) return;
+        if (playerIDamage != null)
         {
-            _spriteRenderer.transform.DOMove(_gameManager.ConflictArea.position, _attackSpeed).SetEase(Ease.OutBack).OnComplete(() =>
+            if (_enemySCB.EnemyTypes == EnemyTypes.Melee)
             {
+                _spriteRenderer.transform.DOMove(_gameManager.ConflictArea.position, _attackSpeed).SetEase(Ease.OutBack).OnComplete(() =>
+                {
+                    _playerHolder.GetFirstOne().GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
+                    _spriteRenderer.transform.DOMove(_enemyHolder.GetTransform(MyIndex).position, _attackSpeed).SetEase(Ease.OutBack);
+                });
+            }
+            else if (_enemySCB.EnemyTypes == EnemyTypes.Archer)
+            {
+                _spriteRenderer.transform.DOPunchPosition(Vector3.left, _attackSpeed).SetEase(Ease.OutBack);
                 _playerHolder.GetFirstOne().GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
-                _spriteRenderer.transform.DOMove(_enemyHolder.GetTransform(MyIndex).position, _attackSpeed).SetEase(Ease.OutBack);
-            });
+            }
         }
-        else if (_enemySCB.EnemyTypes == EnemyTypes.Archer)
-        {
-            _spriteRenderer.transform.DOPunchPosition(Vector3.left, _attackSpeed).SetEase(Ease.OutBack);
-            _playerHolder.GetFirstOne().GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
-        }
-
+    }
+    void OnDestroy()
+    {
+        DOTween.Kill(_spriteRenderer.transform);
     }
 }

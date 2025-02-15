@@ -57,7 +57,6 @@ public class Player : MonoBehaviour, IHoldObject, IDamage, IPlayer
     }
     public void AttackAnimation()
     {
-        DOTween.Kill(transform);
         if (_playerType == PlayerTypes.Melee)
         {
             _spriteRenderer.transform.DOMove(_gameManager.ConflictArea.position, _attackSpeed).SetEase(Ease.OutBack).OnComplete(() =>
@@ -75,11 +74,14 @@ public class Player : MonoBehaviour, IHoldObject, IDamage, IPlayer
 
     public void Die()
     {
-
+        _enemyHolder.SetEmpty(_myIndex);
     }
 
     public void OnMove()
     {
     }
-
+    void OnDestroy()
+    {
+        DOTween.Kill(_spriteRenderer.transform);
+    }
 }
