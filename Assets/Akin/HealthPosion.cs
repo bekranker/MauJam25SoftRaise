@@ -96,5 +96,6 @@ public class HealthPosion : MonoBehaviour,IItem,IPowerItem
     public void PowerEffect(SlaveCode slaveCode)
     {
         slaveCode.Health = slaveCode.Health + Health;
+        Destroy(gameObject);
     }
 }

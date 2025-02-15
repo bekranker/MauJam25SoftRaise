@@ -140,6 +140,7 @@ public class Sword : MonoBehaviour,IItem,IGun
 
     public void Effect()
     {
+        Destroy(gameObject);
         //efekt yaz
     }
 }

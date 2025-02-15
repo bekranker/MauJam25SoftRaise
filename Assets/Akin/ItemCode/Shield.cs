@@ -114,6 +114,7 @@ public class Shield : MonoBehaviour,IItem,IGun
 
                 chosenSlave.LevelValue = 0;
             }
+      
         }
         else if (chosenSlave.Gun == null && itemSettings.LevelNumber == 1)
         {
@@ -138,6 +139,7 @@ public class Shield : MonoBehaviour,IItem,IGun
 
     public void Effect()
     {
+        Destroy(gameObject);
         //efekt yaz
     }
 }

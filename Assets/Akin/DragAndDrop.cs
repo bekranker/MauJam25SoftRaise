@@ -71,14 +71,17 @@ public class DragAndDrop : MonoBehaviour
             {
                 ((IGun)ObjectItemControlCode).Upgrade();
                 ((IGun)ObjectItemControlCode).Effect();
-                Destroy(gameObject);
+               
             }
             else if(ObjectItemControlCode is IPowerItem)
             {
                 ((IPowerItem)ObjectItemControlCode).PowerEffect(SlaveCode);
+               
+
             }
             ChosenSlave = null;
             SlaveCode = null;
+
 
 
         }

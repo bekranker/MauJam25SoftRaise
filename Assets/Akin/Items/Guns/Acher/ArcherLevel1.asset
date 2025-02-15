@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7138d13dcc0ef3149b03424f99742b29, type: 3}
   m_Name: ArcherLevel1
   m_EditorClassIdentifier: 
-  assetSprite: {fileID: 0}
+  assetSprite: {fileID: 7482667652216324306, guid: f42d428d1de20d94abafaedcc1ba1a6b, type: 3}
   DayPrice: 0
   NightPrice: 0
   DMG: 0
