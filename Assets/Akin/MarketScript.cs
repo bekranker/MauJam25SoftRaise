@@ -5,87 +5,98 @@ public class MarketScript : MonoBehaviour
     [SerializeField] List<GameObject> MarketPoints;
     [SerializeField] List<GameObject> ObjectSale;
 
-    private List<GameObject> Level1Items;
-    private List<GameObject> Level2Items;
-    private List<GameObject> Level3Items;
-    private List<GameObject> Level4Items;
-
-    private int RandomLevel1;
-    private int RandomLevel2;
-    private int RandomLevel3;
-    private int RandomLevel4;
+    [SerializeField] List<GameObject> Level1Object;
+    [SerializeField] List<GameObject> level2Object;
+    [SerializeField] List<GameObject> level3Object;
+    [SerializeField] List<GameObject> level4Object;
 
 
-    private int DayRandomLevel1;
-    private int DayRandomLevel2;
-    private int DayRandomLevel3;
-    private int DayRandomLevel4;
+    private int Level1ItemRandomizer;
+    private int Level2ItemRandomizer;
+    private int Level3ItemRandomizer;
+    private int Level4ItemRandomizer;
 
-    private int NightRandomLevel1;
-    private int NightRandomLevel2;
-    private int NightRandomLevel3;
-    private int NightRandomLevel4;
+
+    [SerializeField] int DayLevel1Item;
+    [SerializeField] int DayLevel2Item;
+    [SerializeField] int DayLevel3Item;
+    [SerializeField] int DayLevel4Item;
+
+    [SerializeField] int NightLevel1Item;
+    [SerializeField] int NightLevel2Item;
+    [SerializeField] int NightLevel3Item;
+    [SerializeField] int NightLevel4Item;
     void Start()
     {
+        DaySettings();
         ObjectRandomLister();
+    }
+
+    void DaySettings()
+    {
+        Level1ItemRandomizer = DayLevel1Item;
+        Level2ItemRandomizer = DayLevel2Item;
+        Level3ItemRandomizer = DayLevel3Item;
+        Level4ItemRandomizer = DayLevel4Item;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     void ObjectRandomLister()
     {
-        foreach (GameObject Items in ObjectSale)
+        foreach (GameObject b in ObjectSale)
         {
-            if(Items.GetComponent<ItemSO>().LevelNumber == 1)
+            if (b.GetComponent<IItem>().itemSettings.LevelNumber == 1)
             {
-                Level1Items.Add(Items);
+                Level1Object.Add(b);
             }
-            else if(Items.GetComponent<ItemSO>().LevelNumber == 2)
+            else if (b.GetComponent<IItem>().itemSettings.LevelNumber == 2)
             {
-                Level2Items.Add(Items);
+                level2Object.Add(b);
             }
-            else if (Items.GetComponent<ItemSO>().LevelNumber == 3)
+            else if (b.GetComponent<IItem>().itemSettings.LevelNumber == 3)
             {
-                Level3Items.Add(Items);
+                level3Object.Add(b);
             }
-            else if (Items.GetComponent<ItemSO>().LevelNumber == 4)
+            else if (b.GetComponent<IItem>().itemSettings.LevelNumber == 4)
             {
-                Level4Items.Add(Items);
+                level4Object.Add(b);
             }
         }
-        for (int i = 0; i< MarketPoints.Count; i++)
+        for (int i = 0; i < MarketPoints.Count; i++)
         {
-            int LevelRandom = Random.Range(0, 101);
+            int RandomValue = Random.Range(0, Level1ItemRandomizer);
+            if (RandomValue <= Level4ItemRandomizer)
+            {
+                int RandomObject = Random.Range(0, level4Object.Count);
+                GameObject SpawnedObject = Instantiate(level4Object[RandomObject]);
+                SpawnedObject.transform.position = MarketPoints[i].transform.position;
 
-            if(LevelRandom <= RandomLevel4)
-            {
-                int RandomSelection = Random.Range(0, ObjectSale.Count);
-                GameObject createdObject = Instantiate(Level4Items[RandomSelection]);
-                createdObject.transform.position = MarketPoints[i].transform.position;
             }
-            else if (LevelRandom>RandomLevel4 && LevelRandom <= RandomLevel3)
+            else if ( RandomValue > Level4ItemRandomizer && RandomValue<=Level3ItemRandomizer)
             {
-                int RandomSelection = Random.Range(0, ObjectSale.Count);
-                GameObject createdObject = Instantiate(Level3Items[RandomSelection]);
-                createdObject.transform.position = MarketPoints[i].transform.position;
-            }
-            else if (LevelRandom > RandomLevel3 && LevelRandom <= RandomLevel2)
-            {
-                int RandomSelection = Random.Range(0, ObjectSale.Count);
-                GameObject createdObject = Instantiate(Level2Items[RandomSelection]);
-                createdObject.transform.position = MarketPoints[i].transform.position;
-            }
-            else
-            {
-                int RandomSelection = Random.Range(0, ObjectSale.Count);
-                GameObject createdObject = Instantiate(Level1Items[RandomSelection]);
-                createdObject.transform.position = MarketPoints[i].transform.position;
-            }
+                int RandomObject = Random.Range(0, level3Object.Count);
+                GameObject SpawnedObject = Instantiate(level3Object[RandomObject]);
+                SpawnedObject.transform.position = MarketPoints[i].transform.position;
 
+            }
+            else if (RandomValue > Level3ItemRandomizer && RandomValue <= Level2ItemRandomizer)
+            {
+                int RandomObject = Random.Range(0, level2Object.Count);
+                GameObject SpawnedObject = Instantiate(level2Object[RandomObject]);
+                SpawnedObject.transform.position = MarketPoints[i].transform.position;
 
+            }
+            else if (RandomValue > Level2ItemRandomizer && RandomValue <= Level1ItemRandomizer)
+            {
+                int RandomObject = Random.Range(0, Level1Object.Count);
+                GameObject SpawnedObject = Instantiate(Level1Object[RandomObject]);
+                SpawnedObject.transform.position = MarketPoints[i].transform.position;
+
+            }
         }
     }
 }

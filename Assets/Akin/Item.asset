@@ -15,5 +15,7 @@ MonoBehaviour:
   assetSprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   DayPrice: 5
   NightPrice: 10
+  DMG: 0
+  Shield: 0
   itemType: 0
-  LevelNumber: 2
+  LevelNumber: 1

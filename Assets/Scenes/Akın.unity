@@ -700,6 +700,18 @@ MonoBehaviour:
   ObjectSale:
   - {fileID: 7467194840567784579, guid: 2309bf9fafbf08b4aa73b19ff17a5566, type: 3}
   - {fileID: 5977438116365302952, guid: 32f43c402dc8bec40a2411beb6ec59c7, type: 3}
+  Level1Object: []
+  level2Object: []
+  level3Object: []
+  level4Object: []
+  DayLevel1Item: 100
+  DayLevel2Item: 1
+  DayLevel3Item: 1
+  DayLevel4Item: 1
+  NightLevel1Item: 0
+  NightLevel2Item: 0
+  NightLevel3Item: 0
+  NightLevel4Item: 0
 --- !u!1 &418244056
 GameObject:
   m_ObjectHideFlags: 0
