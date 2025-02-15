@@ -1,11 +1,12 @@
 using UnityEngine;
-
+using System;
 public class PlayerItem : MonoBehaviour,IItem, IHuman
 {
     [SerializeField] private ItemSO _itemSettings;
     [SerializeField] private DragAndDrop _itemDropData;
 
     [SerializeField] GameObject HumanPrefab;
+    public static Action isResetHumanPanel;
     public bool objestIsTaken { get; set; }
 
     public ItemSO itemSettings
@@ -95,7 +96,9 @@ public class PlayerItem : MonoBehaviour,IItem, IHuman
 
     public void HumanEffect(GameObject gameObject)
     {
+        isResetHumanPanel?.Invoke();
         gameObject.GetComponent<Holder>().Add(HumanPrefab);
+        CoinCode.instance.TakeObject(price);
     }
 
    

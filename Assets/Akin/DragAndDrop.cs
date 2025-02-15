@@ -86,6 +86,7 @@ public class DragAndDrop : MonoBehaviour
             if(ObjectItemControlCode is IHuman)
             {
                 ((IHuman)ObjectItemControlCode).HumanEffect(HumanPanel);
+                Destroy(HumanPanel);
             }
         }
 
@@ -121,7 +122,7 @@ public class DragAndDrop : MonoBehaviour
             isRecyle = true;
         }
 
-        if(gameObject.tag == "HumanCard" && collision.gameObject.tag == "Holder")
+        if(ObjectItemControlCode.itemSettings.itemType ==ItemType.Human && collision.gameObject.tag == "Holder")
         {
             isPlayerAdd = true;
             HumanPanel = collision.gameObject;
@@ -146,10 +147,11 @@ public class DragAndDrop : MonoBehaviour
             SlaveCode = null;
         }
 
-        if (gameObject.tag == "HumanCard" && collision.gameObject.tag == "Holder")
+        if (ObjectItemControlCode.itemSettings.itemType == ItemType.Human && collision.gameObject.tag == "Holder")
         {
             isPlayerAdd = false;
             HumanPanel = null;
+
         }
 
 
