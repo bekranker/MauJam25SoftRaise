@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
     private Holder _enemyHolder;
     private Holder _playerHolder;
 
+    public GameObject RootGameObject { get => gameObject; set => value = gameObject; }
+
     public void Init(EnemySCB enemySCB, GameManager gameManager)
     {
         _gameManager = gameManager;
@@ -29,6 +31,7 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
         _conflictArea = gameManager.ConflictArea;
         _attackHandler = gameManager.C_AttackHandler;
         _playerHolder = _gameManager.Player_Holder;
+        RootGameObject = gameObject;
         ChangeVisual();
         MyIndex = _enemyHolder.GetIndex(this);
         print(MyIndex);
@@ -79,14 +82,14 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
         {
             _spriteRenderer.transform.DOMove(_gameManager.ConflictArea.position, _attackSpeed).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                _playerHolder.HolderGameObjects[0].GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
+                _playerHolder.GetFirstOne().GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
                 _spriteRenderer.transform.DOMove(_enemyHolder.GetTransform(MyIndex).position, _attackSpeed).SetEase(Ease.OutBack);
             });
         }
         else if (_enemySCB.EnemyTypes == EnemyTypes.Archer)
         {
             _spriteRenderer.transform.DOPunchPosition(Vector3.left, _attackSpeed).SetEase(Ease.OutBack);
-            _playerHolder.HolderGameObjects[0].GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
+            _playerHolder.GetFirstOne().GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
         }
 
     }

@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Holder : MonoBehaviour, IHolder
 {
-    public List<IHoldObject> _gridsToMove = new();
     [SerializeField] private List<Transform> _points;
     public Dictionary<int, IHoldObject> _holdObjects = new();
     public event Action OnFullEmpty, OnOneEmpty;
-    public List<GameObject> HolderGameObjects;
 
     private int _index = 0;
+
+    void Start()
+    {
+    }
     public Transform GetTransform(int index) => _points[index];
     /// <summary>
     /// adding 
@@ -23,10 +26,32 @@ public class Holder : MonoBehaviour, IHolder
 
         spawnedObject.transform.position = _points[_index].position;
         _holdObjects.Add(_index, spawnedObject.GetComponent<IHoldObject>());
-        HolderGameObjects.Add(spawnedObject);
         _index++;
     }
+    void ShiftIndicesBack()
+    {
+        if (_holdObjects.Count == 0)
+            return;
 
+        // Dictionary'yi geçici bir listeye kopyala
+        var tempList = new List<KeyValuePair<int, IHoldObject>>(_holdObjects);
+
+        // Dictionary'yi temizle
+        _holdObjects.Clear();
+
+        // Elemanları yeni indekslerle geri ekle
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            int newKey = 0;
+            if (newKey > 0)
+                newKey = i - 1;
+            if (newKey >= 0) // Eğer yeni indeks negatif değilse ekle
+            {
+                _holdObjects[newKey] = tempList[i].Value;
+                _holdObjects[newKey].RootGameObject.transform.DOMove(_points[newKey].position, .3f);
+            }
+        }
+    }
     /// <summary>
     /// eğer dictionary boş değilse true döndürür
     /// </summary>
@@ -83,7 +108,7 @@ public class Holder : MonoBehaviour, IHolder
 
     public GameObject GetFirstOne()
     {
-        return HolderGameObjects[0];
+        return GetObject(0).RootGameObject;
     }
 
     public IHoldObject GetObject(int index)
