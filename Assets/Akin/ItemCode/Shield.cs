@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Shield : MonoBehaviour
+public class Shield : MonoBehaviour,IItem,IGun
 {
     [SerializeField] private ItemSO _itemSettings;
     [SerializeField] private DragAndDrop _itemDropData;
@@ -122,5 +122,10 @@ public class Shield : MonoBehaviour
 
             CoinCode.instance.TakeObject(price);
         }
+    }
+
+    public void Effect()
+    {
+        //efekt yaz
     }
 }

@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class Sword : MonoBehaviour,IItem,IGun
+public class HealthPosion : MonoBehaviour,IItem,IPowerItem
 {
-
     [SerializeField] private ItemSO _itemSettings;
     [SerializeField] private DragAndDrop _itemDropData;
 
@@ -93,40 +92,8 @@ public class Sword : MonoBehaviour,IItem,IGun
         Destroy(gameObject);
     }
 
-    public void Upgrade()
+    public void PowerEffect()
     {
-        Debug.Log("upgradeEffect");
-        SlaveCode chosenSlave = itemDropData.ChosenSlave.GetComponent<SlaveCode>();
-
-        if (chosenSlave.Gun != null && itemSettings.itemType == chosenSlave.Gun.itemType)
-        {
-            chosenSlave.LevelValue++;
-
-            if (chosenSlave.LevelValue == chosenSlave.Gun.LevelNumber)
-            {
-                chosenSlave.ListIndex++;
-
-                if (itemSettings.itemType == ItemType.Sword)
-                {
-                    chosenSlave.Gun = chosenSlave.SwordItems[chosenSlave.ListIndex];
-                }
-
-                chosenSlave.LevelValue = 0;
-            }
-        }
-        else if (chosenSlave.Gun == null)
-        {
-            if (itemSettings.itemType == ItemType.Sword)
-            {
-                chosenSlave.Gun = chosenSlave.SwordItems[0];
-            }
-
-            CoinCode.instance.TakeObject(price);
-        }
-    }
-
-    public void Effect()
-    {
-        //efekt yaz
+       //efekt yaz
     }
 }

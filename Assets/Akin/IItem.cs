@@ -9,7 +9,7 @@ public interface IItem
 
     void ItemTaken();
     void ItemSell();
-    void Upgrade();
+   
     void DayPriceEventVoid();
     void NightPriceEventVoid();
 }

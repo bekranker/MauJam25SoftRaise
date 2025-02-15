@@ -123,4 +123,9 @@ public class Archer : MonoBehaviour, IItem, IGun
             CoinCode.instance.TakeObject(price);
         }
     }
+
+    public void Effect()
+    {
+        //efekt yaz
+    }
 }
