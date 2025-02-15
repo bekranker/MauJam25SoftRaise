@@ -1,15 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName ="Item",menuName ="Item")]
 public class ItemSO : ScriptableObject
 {
     public Sprite assetSprite;
-    public float Price;
+    public float DayPrice;
+    public float NightPrice;
     public ItemType itemType;
-    public int PhaseNumber;
+    public int LevelNumber = 1;
 }
 public enum ItemType
 {
-    Damage,
+    Archer,
+    Sword,
     Shield
 }

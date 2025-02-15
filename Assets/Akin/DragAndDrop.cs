@@ -9,11 +9,20 @@ public class DragAndDrop : MonoBehaviour
 
     bool isObjectTaken;
     bool isRecyle;
-    GameObject ChosenSlave;
+    
+    public GameObject ChosenSlave;
+    SlaveCode SlaveCode;
     public TakenItemCode ObjectItemControlCode;
 
     Collider2D collidedTile = null;
+    Collider2D CollidedHuman = null;
     private void Start()
+    {
+        objectStartPosition = transform.position;
+        objectInventoryPosition = objectStartPosition;
+        ObjectItemControlCode = GetComponent<TakenItemCode>();
+    }
+    void SOSettings()
     {
         objectStartPosition = transform.position;
         objectInventoryPosition = objectStartPosition;
@@ -39,7 +48,7 @@ public class DragAndDrop : MonoBehaviour
         isDragging = false;
         gameObject.transform.position = objectInventoryPosition;
 
-        if (isObjectTaken && !ObjectItemControlCode.objestIsTaken && CoinCode.instance.Coin>= ObjectItemControlCode.itemSettings.Price)
+        if (isObjectTaken && !ObjectItemControlCode.objestIsTaken && CoinCode.instance.Coin>= ObjectItemControlCode.itemSettings.DayPrice)
         {
             collidedTile.GetComponent<InventoryCode>().isFull = true;
             ObjectItemControlCode.ItemTaken();
@@ -49,14 +58,28 @@ public class DragAndDrop : MonoBehaviour
         if (isRecyle)
         {
             ObjectItemControlCode.ItemSell();
+            isRecyle = false;
         }
 
         if(ChosenSlave != null) 
         {
-            ObjectItemControlCode.CharacterBuff(ChosenSlave);
+           
+           if(ObjectItemControlCode is IGun)
+            {
+                ObjectItemControlCode.Upgrade();
+                Destroy(gameObject);
+            }
+            else
+            {
+                ObjectItemControlCode.CharacterBuff(ChosenSlave);
+            }
             ChosenSlave = null;
+            SlaveCode = null;
+
+
         }
 
+      
            
     }
 
@@ -80,13 +103,14 @@ public class DragAndDrop : MonoBehaviour
             isRecyle = true;
         }
 
-        if(collision.gameObject.tag == "Slaves")
+        if(collision.gameObject.tag == "Slave")
         {
+            
             ChosenSlave = collision.gameObject;
+            SlaveCode = ChosenSlave.GetComponent<SlaveCode>();
+            
         }
-
-
-       
+        
     }
 
    
@@ -104,6 +128,7 @@ public class DragAndDrop : MonoBehaviour
             collidedTile.GetComponent<InventoryCode>().isFull = false;
             ChosenSlave = null;
         }
+      
            
 
     }
