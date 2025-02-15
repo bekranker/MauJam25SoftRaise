@@ -15,7 +15,6 @@ public class DragAndDrop : MonoBehaviour
     public TakenItemCode ObjectItemControlCode;
 
     Collider2D collidedTile = null;
-    Collider2D CollidedHuman = null;
     private void Start()
     {
         objectStartPosition = transform.position;

@@ -358,7 +358,8 @@ MonoBehaviour:
   SwordItems: []
   ArcherItems:
   - {fileID: 11400000, guid: da5b0ba98df7d7f4aa9e9dceddca8a9a, type: 2}
-  - {fileID: 11400000, guid: c864bfd6ab6bcec44b206d7e40948492, type: 2}
+  - {fileID: 11400000, guid: 5abbb9d588683ba40a4353b7d9e79c8c, type: 2}
+  - {fileID: 11400000, guid: 5abbb9d588683ba40a4353b7d9e79c8c, type: 2}
   ShieldItems: []
   ListIndex: 0
 --- !u!61 &225387618

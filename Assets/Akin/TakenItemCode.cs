@@ -11,6 +11,7 @@ public class TakenItemCode : MonoBehaviour,IGun
     void Start()
     {
         SOSettings();
+        DayPriceEventVoid();
     }
     void SOSettings()
     {
@@ -69,32 +70,34 @@ public class TakenItemCode : MonoBehaviour,IGun
                     itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ShieldItems[itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex];
 
                 }
+                itemDropData.ChosenSlave.GetComponent<SlaveCode>().LevelValue = 0;
             }
 
-            itemDropData.ChosenSlave.GetComponent<SlaveCode>().LevelValue = 0;
+            
 
         }
         else if(itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun == null)
         {
             if (itemSettings.itemType == ItemType.Sword)
             {
-                itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex + 1;
-                itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun = itemDropData.ChosenSlave.GetComponent<SlaveCode>().SwordItems[itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex];
+                //itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex + 1;
+                itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun = itemDropData.ChosenSlave.GetComponent<SlaveCode>().SwordItems[0];
 
             }
             else if (itemSettings.itemType == ItemType.Archer)
             {
-                itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex + 1;
-                itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ArcherItems[itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex];
+                //itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex + 1;
+                itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ArcherItems[0];
 
             }
             else if (itemSettings.itemType == ItemType.Shield)
             {
-                itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex + 1;
-                itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ShieldItems[itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex];
+               // itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ListIndex + 1;
+                itemDropData.ChosenSlave.GetComponent<SlaveCode>().Gun = itemDropData.ChosenSlave.GetComponent<SlaveCode>().ShieldItems[0];
 
             }
+            CoinCode.instance.TakeObject(price);
+
         }
-        
     }
 }
