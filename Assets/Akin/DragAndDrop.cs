@@ -9,8 +9,10 @@ public class DragAndDrop : MonoBehaviour
 
     bool isObjectHandled;
     bool isRecyle;
+    bool isPlayerAdd;
     
     public GameObject ChosenSlave;
+    public GameObject HumanPanel;
     SlaveCode SlaveCode;
     public IItem ObjectItemControlCode;
 
@@ -79,8 +81,17 @@ public class DragAndDrop : MonoBehaviour
 
         }
 
-      
-           
+        if (isPlayerAdd)
+        {
+            if(ObjectItemControlCode is IHuman)
+            {
+                ((IHuman)ObjectItemControlCode).HumanEffect(HumanPanel);
+            }
+        }
+
+
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -110,6 +121,11 @@ public class DragAndDrop : MonoBehaviour
             isRecyle = true;
         }
 
+        if(gameObject.tag == "HumanCard" && collision.gameObject.tag == "Holder")
+        {
+            isPlayerAdd = true;
+            HumanPanel = collision.gameObject;
+        }
         
         
     }
@@ -130,7 +146,14 @@ public class DragAndDrop : MonoBehaviour
             SlaveCode = null;
         }
 
-        if(collision.gameObject.tag == "Inventory")
+        if (gameObject.tag == "HumanCard" && collision.gameObject.tag == "Holder")
+        {
+            isPlayerAdd = false;
+            HumanPanel = null;
+        }
+
+
+        if (collision.gameObject.tag == "Inventory")
         {
            
         }

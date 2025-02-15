@@ -14,5 +14,6 @@ public enum ItemType
 {
     Archer,
     Sword,
-    Shield
+    Shield,
+    Human
 }
