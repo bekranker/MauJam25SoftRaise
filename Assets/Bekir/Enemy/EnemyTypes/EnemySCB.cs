@@ -7,4 +7,5 @@ public class EnemySCB : ScriptableObject
     public Sprite EnemySprite;
     public string EnemyName;
     public float AttackAmount;
+    public EnemyTypes EnemyTypes = EnemyTypes.Archer;
 }

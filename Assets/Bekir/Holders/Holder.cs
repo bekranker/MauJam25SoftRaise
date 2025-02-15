@@ -1,12 +1,17 @@
+using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Holder : MonoBehaviour, IHolder
 {
-    public List<IHoldObject> _gridsToMove = new();
     [SerializeField] private List<Transform> _points;
     public Dictionary<int, IHoldObject> _holdObjects = new();
+    public event Action OnFullEmpty, OnOneEmpty;
+
     private int _index = 0;
+
+    public Transform GetTransform(int index) => _points[index];
     /// <summary>
     /// adding 
     /// </summary>
@@ -20,7 +25,25 @@ public class Holder : MonoBehaviour, IHolder
         _holdObjects.Add(_index, spawnedObject.GetComponent<IHoldObject>());
         _index++;
     }
+    public void ShiftIndicesBack()
+    {
+        if (_holdObjects.Count == 0)
+            return;
 
+        // Dictionary'yi geçici bir listeye kopyala
+        var tempList = new List<KeyValuePair<int, IHoldObject>>(_holdObjects);
+
+        // Dictionary'yi temizle
+        _holdObjects.Clear();
+
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            int newKey = i;
+            // Eğer yeni indeks negatifse, elemanı en sona taşı
+            _holdObjects[newKey] = tempList[i].Value;
+            tempList[i].Value.RootGameObject.transform.position = _points[newKey].position;
+        }
+    }
     /// <summary>
     /// eğer dictionary boş değilse true döndürür
     /// </summary>
@@ -44,11 +67,45 @@ public class Holder : MonoBehaviour, IHolder
 
     public bool IsAllBusy()
     {
-        foreach (var item in _holdObjects)
-        {
-            if (item.Value == null) return false;
-        }
         if (_holdObjects.Count == 0) return false;
+
+        if (_holdObjects.Count == 5)
+        {
+            foreach (var item in _holdObjects)
+            {
+                if (item.Value == null) return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
         return true;
+    }
+
+    public void SetEmpty(int index)
+    {
+        if (!_holdObjects.ContainsKey(index)) return;
+
+        if (_holdObjects.Count == 1)
+        {
+            _holdObjects.Remove(index);
+            OnFullEmpty?.Invoke();
+            return;
+        }
+        _holdObjects.Remove(index);
+        OnOneEmpty?.Invoke();
+        ShiftIndicesBack();
+    }
+
+    public GameObject GetFirstOne()
+    {
+        return GetObject(0).RootGameObject;
+    }
+
+    public IHoldObject GetObject(int index)
+    {
+        return _holdObjects[index];
     }
 }
