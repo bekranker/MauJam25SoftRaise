@@ -12,20 +12,20 @@ public class DragAndDrop : MonoBehaviour
     
     public GameObject ChosenSlave;
     SlaveCode SlaveCode;
-    public TakenItemCode ObjectItemControlCode;
+    public IItem ObjectItemControlCode;
 
     [SerializeField]GameObject collidedTile = null;
     private void Start()
     {
         objectStartPosition = transform.position;
         objectInventoryPosition = objectStartPosition;
-        ObjectItemControlCode = GetComponent<TakenItemCode>();
+        ObjectItemControlCode = GetComponent<IItem>();
     }
     void SOSettings()
     {
         objectStartPosition = transform.position;
         objectInventoryPosition = objectStartPosition;
-        ObjectItemControlCode = GetComponent<TakenItemCode>();
+        ObjectItemControlCode = GetComponent<IItem>();
     }
     void OnMouseDown()
     {
@@ -70,7 +70,7 @@ public class DragAndDrop : MonoBehaviour
             }
             else
             {
-                ObjectItemControlCode.CharacterBuff(ChosenSlave);
+                //ObjectItemControlCode.CharacterBuff(ChosenSlave);
             }
             ChosenSlave = null;
             SlaveCode = null;

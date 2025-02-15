@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3483692636734517566}
   - component: {fileID: 5834768059802999011}
   - component: {fileID: 1948120791819235927}
-  - component: {fileID: 5009858046019912266}
+  - component: {fileID: 1167228124133173328}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -103,7 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646edfa37e57df943a741c9c8a9a69fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectItemControlCode: {fileID: 0}
+  ChosenSlave: {fileID: 0}
+  collidedTile: {fileID: 0}
 --- !u!61 &5834768059802999011
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -177,7 +178,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5009858046019912266
+--- !u!114 &1167228124133173328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,9 +187,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7467194840567784579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ae4c5607646a74a9bd479bd353bd4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 09f5150ac07989347bfb2200db852047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objestIsTaken: 0
-  itemSettings: {fileID: 11400000, guid: da5b0ba98df7d7f4aa9e9dceddca8a9a, type: 2}
-  itemDropData: {fileID: 0}
+  _itemSettings: {fileID: 11400000, guid: da5b0ba98df7d7f4aa9e9dceddca8a9a, type: 2}
+  _itemDropData: {fileID: 3483692636734517566}
