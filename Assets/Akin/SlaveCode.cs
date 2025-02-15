@@ -11,14 +11,17 @@ public class SlaveCode : MonoBehaviour
 
     public int ListIndex = 0;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public float DMG;
+    public float Shield;
+   
+    
     void Update()
     {
-        
+        if(Gun != null)
+        {
+            DMG = Gun.DMG;
+            Shield = Gun.Shield;
+        }
+       
     }
 }

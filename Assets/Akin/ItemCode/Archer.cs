@@ -99,7 +99,7 @@ public class Archer : MonoBehaviour, IItem, IGun
 
         if (chosenSlave.Gun != null && itemSettings.itemType == chosenSlave.Gun.itemType)
         {
-            chosenSlave.LevelValue++;
+            chosenSlave.LevelValue = chosenSlave.LevelValue + itemSettings.LevelNumber;
 
             if (chosenSlave.LevelValue == chosenSlave.Gun.LevelNumber)
             {

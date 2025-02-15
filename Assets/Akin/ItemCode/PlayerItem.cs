@@ -85,6 +85,7 @@ public class PlayerItem : MonoBehaviour,IItem, IHuman
     public void ItemTaken()
     {
         CoinCode.instance.TakeObject(price);
+        isResetHumanPanel?.Invoke();
         objestIsTaken = true;
     }
 
@@ -102,5 +103,4 @@ public class PlayerItem : MonoBehaviour,IItem, IHuman
     }
 
    
-
 }

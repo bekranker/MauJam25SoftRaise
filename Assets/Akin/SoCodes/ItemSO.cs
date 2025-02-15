@@ -7,8 +7,13 @@ public class ItemSO : ScriptableObject
     public Sprite assetSprite;
     public float DayPrice;
     public float NightPrice;
+    public float DMG;
+    public float Shield;
     public ItemType itemType;
     public int LevelNumber = 1;
+
+    ///
+    
 }
 public enum ItemType
 {
