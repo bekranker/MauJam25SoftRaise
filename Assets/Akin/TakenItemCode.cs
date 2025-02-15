@@ -10,6 +10,7 @@ public class TakenItemCode : MonoBehaviour,IGun
 
     void Start()
     {
+        objestIsTaken = false;
         SOSettings();
         DayPriceEventVoid();
     }
@@ -97,6 +98,7 @@ public class TakenItemCode : MonoBehaviour,IGun
 
             }
             CoinCode.instance.TakeObject(price);
+            
 
         }
     }
