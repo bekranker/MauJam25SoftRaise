@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     {
         if (_holder.IsAllBusy()) return;
         Enemy tempEnemy = Instantiate(_enemyPrefab);
-        tempEnemy.Init(enemy, _gameManager);
         _holder.Add(tempEnemy.gameObject);
+        tempEnemy.Init(enemy, _gameManager);
     }
 }

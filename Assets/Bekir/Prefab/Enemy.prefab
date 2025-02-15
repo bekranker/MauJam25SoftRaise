@@ -343,6 +343,8 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 3901195020668895178}
   _nameTMP: {fileID: 6880497203660026254}
   _healthCount: {fileID: 6539619156833985153}
+  _attackSpeed: 0.27
+  _attackHandler: {fileID: 0}
   MyIndex: 0
 --- !u!1 &8444559146124194699
 GameObject:

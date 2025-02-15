@@ -8,6 +8,7 @@ public interface IHolder
     public int GetIndex(IHoldObject holdObject);
     public bool IsAllBusy();
     public void SetEmpty(int index);
-    public IHoldObject GetFirstOne();
+    public IHoldObject GetObject(int index);
+    public GameObject GetFirstOne();
 
 }

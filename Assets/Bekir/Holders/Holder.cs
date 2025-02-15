@@ -8,7 +8,10 @@ public class Holder : MonoBehaviour, IHolder
     [SerializeField] private List<Transform> _points;
     public Dictionary<int, IHoldObject> _holdObjects = new();
     public event Action OnFullEmpty, OnOneEmpty;
+    public List<GameObject> HolderGameObjects;
+
     private int _index = 0;
+    public Transform GetTransform(int index) => _points[index];
     /// <summary>
     /// adding 
     /// </summary>
@@ -20,10 +23,7 @@ public class Holder : MonoBehaviour, IHolder
 
         spawnedObject.transform.position = _points[_index].position;
         _holdObjects.Add(_index, spawnedObject.GetComponent<IHoldObject>());
-        if (spawnedObject.TryGetComponent<Enemy>(out Enemy enemy))
-        {
-            enemy.MyIndex = _index;
-        }
+        HolderGameObjects.Add(spawnedObject);
         _index++;
     }
 
@@ -81,8 +81,13 @@ public class Holder : MonoBehaviour, IHolder
         OnOneEmpty?.Invoke();
     }
 
-    public IHoldObject GetFirstOne()
+    public GameObject GetFirstOne()
     {
-        return _holdObjects[0];
+        return HolderGameObjects[0];
+    }
+
+    public IHoldObject GetObject(int index)
+    {
+        return _holdObjects[index];
     }
 }

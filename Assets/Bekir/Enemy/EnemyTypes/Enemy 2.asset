@@ -16,3 +16,4 @@ MonoBehaviour:
   EnemySprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   EnemyName: "Ak\u0131n"
   AttackAmount: 1.83
+  EnemyTypes: 0

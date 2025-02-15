@@ -9,7 +9,8 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private Spawner _spawner;
     [SerializeField] private TMP_Text _waveTMP;
     [SerializeField] private List<EnemyPackSCB> _enemyPacks = new();
-    private int _waveIndex, _packIndex;
+    [SerializeField] private AttackHandler _attackHandler;
+    private int _waveIndex;
     private int _count;
 
     public void ChangeDayState(Day day)
@@ -36,17 +37,19 @@ public class WaveSystem : MonoBehaviour
         _waveIndex++;
         _count = _waveTypes[_waveIndex].MaxEnemyCount;
         _waveTMP.text = _waveTypes[_waveIndex].WaveName;
-        _packIndex = 0;
     }
     public void WaveInit()
     {
         List<EnemyPackSCB> temp = GetEnemies();
 
-        for (int i = 0; i < temp[_packIndex].Pack.Count; i++)
+        for (int i = 0; i < temp.Count; i++)
         {
-            _spawner.SpawnAnEnemy(temp[_packIndex].Pack[i]);
+            for (int x = 0; x < temp[i].Pack.Count; x++)
+            {
+                _spawner.SpawnAnEnemy(temp[i].Pack[x]);
+            }
         }
-        _packIndex++;
+        _attackHandler.Init();
     }
     /// <summary>
     /// Recursive
@@ -63,17 +66,10 @@ public class WaveSystem : MonoBehaviour
         randCountOfEnemyForAPack = Random.Range(1, _count + 1);
         recursiveTotalPack.Add(_enemyPacks[randCountOfEnemyForAPack]);
         _count -= randCountOfEnemyForAPack;
-        Debug.Log(" before if > 0" + _count);
         if (_count > 0)
         {
-            Debug.Log("if > 0" + _count);
             recursiveTotalPack.AddRange(GetEnemies());
         }
         return recursiveTotalPack;
     }
-}
-public enum Day
-{
-    Morning,
-    Night
 }

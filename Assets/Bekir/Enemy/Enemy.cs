@@ -1,25 +1,46 @@
 using UnityEngine;
 using TMPro;
 using System;
-
+using DG.Tweening;
+using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private TMP_Text _nameTMP;
     [SerializeField] private TMP_Text _healthCount;
-
+    [SerializeField] private float _attackSpeed;
+    [SerializeField] private AttackHandler _attackHandler;
+    private bool _moving;
     private float _healthCounter;
     private EnemySCB _enemySCB;
     public event Action OnDie, OnTakeHit;
     private GameManager _gameManager;
     public int MyIndex;
+    private Transform _conflictArea;
+    private Holder _enemyHolder;
+    private Holder _playerHolder;
 
     public void Init(EnemySCB enemySCB, GameManager gameManager)
     {
         _gameManager = gameManager;
+        _enemyHolder = _gameManager.Enemy_Holder;
         _enemySCB = enemySCB;
         _healthCounter = enemySCB.Health;
+        _conflictArea = gameManager.ConflictArea;
+        _attackHandler = gameManager.C_AttackHandler;
+        _playerHolder = _gameManager.Player_Holder;
         ChangeVisual();
+        MyIndex = _enemyHolder.GetIndex(this);
+        print(MyIndex);
+        if ((MyIndex == 1 || MyIndex == 0) && _enemySCB.EnemyTypes == EnemyTypes.Archer)
+        {
+            _attackHandler.AttackList.Add(this);
+        }
+        else if (MyIndex == 0 && _enemySCB.EnemyTypes == EnemyTypes.Melee)
+        {
+            _attackHandler.AttackList.Add(this);
+        }
+
     }
     public void Damage(float damage)
     {
@@ -34,10 +55,10 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
     }
     public void Die()
     {
-        OnDie?.Invoke();
-        _gameManager.Enemy_Holder.SetEmpty(MyIndex);
-        Destroy(gameObject);
         //para düsürme;
+        OnDie?.Invoke();
+        _enemyHolder.SetEmpty(MyIndex);
+        Destroy(gameObject);
     }
     private void ChangeVisual()
     {
@@ -45,4 +66,28 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
         _nameTMP.text = _enemySCB.EnemyName;
     }
 
+    public void OnMove()
+    {
+        _moving = true;
+    }
+
+    public void AttackAnimation()
+    {
+        if (_moving) return;
+        DOTween.Kill(transform);
+        if (_enemySCB.EnemyTypes == EnemyTypes.Melee)
+        {
+            _spriteRenderer.transform.DOMove(_gameManager.ConflictArea.position, _attackSpeed).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                _playerHolder.HolderGameObjects[0].GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
+                _spriteRenderer.transform.DOMove(_enemyHolder.GetTransform(MyIndex).position, _attackSpeed).SetEase(Ease.OutBack);
+            });
+        }
+        else if (_enemySCB.EnemyTypes == EnemyTypes.Archer)
+        {
+            _spriteRenderer.transform.DOPunchPosition(Vector3.left, _attackSpeed).SetEase(Ease.OutBack);
+            _playerHolder.HolderGameObjects[0].GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
+        }
+
+    }
 }

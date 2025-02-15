@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using DG.Tweening;
+using System.Collections.Generic;
 public class AttackHandler : MonoBehaviour
 {
     [SerializeField] private Holder _enemyHolder;
@@ -8,21 +8,20 @@ public class AttackHandler : MonoBehaviour
     [SerializeField] private float _timer;
 
 
-
-    private float _timeCounter;
+    public List<IHoldObject> AttackList = new();
 
 
     public void Init()
     {
-        _timeCounter = _timer;
         StartCoroutine(AttackIE());
     }
-
-
     private IEnumerator AttackIE()
     {
-
         yield return new WaitForSeconds(_timer);
-
+        AttackList?.ForEach((item) =>
+        {
+            item.AttackAnimation();
+        });
+        Init();
     }
 }
