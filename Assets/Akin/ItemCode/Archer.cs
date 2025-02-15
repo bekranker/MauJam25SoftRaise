@@ -103,9 +103,10 @@ public class Archer : MonoBehaviour, IItem, IGun
 
             if (chosenSlave.LevelValue == chosenSlave.Gun.LevelNumber)
             {
-                chosenSlave.ListIndex++;
+                if (chosenSlave.ListIndex < chosenSlave.ArcherItems.Count)
+                    chosenSlave.ListIndex++;
 
-                if (itemSettings.itemType == ItemType.Archer)
+                if (itemSettings.itemType == ItemType.Archer )
                 {
                     chosenSlave.Gun = chosenSlave.ArcherItems[chosenSlave.ListIndex];
                 }
@@ -115,9 +116,19 @@ public class Archer : MonoBehaviour, IItem, IGun
         }
         else if (chosenSlave.Gun == null)
         {
-            if (itemSettings.itemType == ItemType.Archer)
+            if (itemSettings.itemType == ItemType.Archer && itemSettings.LevelNumber == 1)
             {
                 chosenSlave.Gun = chosenSlave.ArcherItems[0];
+            }
+            else if(itemSettings.itemType == ItemType.Archer && itemSettings.LevelNumber > 1)
+            {
+                foreach(ItemSO i in chosenSlave.ArcherItems)
+                {
+                    if(i.LevelNumber == itemSettings.LevelNumber)
+                    {
+                        chosenSlave.Gun = i;
+                    }
+                }
             }
            
             CoinCode.instance.TakeObject(price);

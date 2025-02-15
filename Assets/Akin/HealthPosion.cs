@@ -5,6 +5,7 @@ public class HealthPosion : MonoBehaviour,IItem,IPowerItem
     [SerializeField] private ItemSO _itemSettings;
     [SerializeField] private DragAndDrop _itemDropData;
 
+    [SerializeField] float Health;
     public bool objestIsTaken { get; set; }
 
     public ItemSO itemSettings
@@ -92,8 +93,8 @@ public class HealthPosion : MonoBehaviour,IItem,IPowerItem
         Destroy(gameObject);
     }
 
-    public void PowerEffect()
+    public void PowerEffect(SlaveCode slaveCode)
     {
-       //efekt yaz
+        slaveCode.Health = slaveCode.Health + Health;
     }
 }

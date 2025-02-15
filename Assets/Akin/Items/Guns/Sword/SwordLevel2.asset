@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7138d13dcc0ef3149b03424f99742b29, type: 3}
-  m_Name: LevelTest
+  m_Name: SwordLevel2
   m_EditorClassIdentifier: 
   assetSprite: {fileID: 0}
-  DayPrice: 5
-  NightPrice: 10
-  itemType: 0
-  LevelNumber: 5
+  DayPrice: 30
+  NightPrice: 50
+  DMG: 20
+  Shield: 0
+  itemType: 1
+  LevelNumber: 2

@@ -95,7 +95,6 @@ public class MarketScript : MonoBehaviour
                 int RandomObject = Random.Range(0, Level1Object.Count);
                 GameObject SpawnedObject = Instantiate(Level1Object[RandomObject]);
                 SpawnedObject.transform.position = MarketPoints[i].transform.position;
-
             }
         }
     }

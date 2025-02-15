@@ -99,11 +99,13 @@ public class Shield : MonoBehaviour,IItem,IGun
 
         if (chosenSlave.Gun != null && itemSettings.itemType == chosenSlave.Gun.itemType)
         {
-            chosenSlave.LevelValue++;
+            chosenSlave.LevelValue = chosenSlave.LevelValue + itemSettings.LevelNumber;
 
             if (chosenSlave.LevelValue == chosenSlave.Gun.LevelNumber)
             {
-                chosenSlave.ListIndex++;
+                if (chosenSlave.ListIndex < chosenSlave.ShieldItems.Count)
+                    chosenSlave.ListIndex++;
+
 
                 if (itemSettings.itemType == ItemType.Shield)
                 {
@@ -113,7 +115,7 @@ public class Shield : MonoBehaviour,IItem,IGun
                 chosenSlave.LevelValue = 0;
             }
         }
-        else if (chosenSlave.Gun == null)
+        else if (chosenSlave.Gun == null && itemSettings.LevelNumber == 1)
         {
             if (itemSettings.itemType == ItemType.Shield)
             {
@@ -121,6 +123,16 @@ public class Shield : MonoBehaviour,IItem,IGun
             }
 
             CoinCode.instance.TakeObject(price);
+        }
+        else if (itemSettings.itemType == ItemType.Shield && itemSettings.LevelNumber > 1)
+        {
+            foreach (ItemSO i in chosenSlave.ShieldItems)
+            {
+                if (i.LevelNumber == itemSettings.LevelNumber)
+                {
+                    chosenSlave.Gun = i;
+                }
+            }
         }
     }
 

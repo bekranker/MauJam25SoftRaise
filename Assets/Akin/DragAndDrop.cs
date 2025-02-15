@@ -10,9 +10,11 @@ public class DragAndDrop : MonoBehaviour
     bool isObjectHandled;
     bool isRecyle;
     bool isPlayerAdd;
-    
+    bool PowerItem;
     public GameObject ChosenSlave;
     public GameObject HumanPanel;
+
+
     SlaveCode SlaveCode;
     public IItem ObjectItemControlCode;
 
@@ -73,7 +75,7 @@ public class DragAndDrop : MonoBehaviour
             }
             else if(ObjectItemControlCode is IPowerItem)
             {
-                ((IPowerItem)ObjectItemControlCode).PowerEffect();
+                ((IPowerItem)ObjectItemControlCode).PowerEffect(SlaveCode);
             }
             ChosenSlave = null;
             SlaveCode = null;
@@ -89,6 +91,7 @@ public class DragAndDrop : MonoBehaviour
                 Destroy(HumanPanel);
             }
         }
+
 
 
 
@@ -127,11 +130,14 @@ public class DragAndDrop : MonoBehaviour
             isPlayerAdd = true;
             HumanPanel = collision.gameObject;
         }
-        
-        
+
+
+       
+
+
     }
 
-   
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Recycle")
@@ -153,14 +159,6 @@ public class DragAndDrop : MonoBehaviour
             HumanPanel = null;
 
         }
-
-
-        if (collision.gameObject.tag == "Inventory")
-        {
-           
-        }
-      
-           
 
     }
     private Vector3 GetMouseWorldPosition()

@@ -10,7 +10,7 @@ public class ItemSO : ScriptableObject
     public float DMG;
     public float Shield;
     public ItemType itemType;
-    public int LevelNumber = 1;
+    public int LevelNumber ;
 
     ///
     
@@ -20,5 +20,6 @@ public enum ItemType
     Archer,
     Sword,
     Shield,
-    Human
+    Human,
+    HealthPot
 }

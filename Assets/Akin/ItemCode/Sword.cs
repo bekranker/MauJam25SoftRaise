@@ -100,11 +100,13 @@ public class Sword : MonoBehaviour,IItem,IGun
 
         if (chosenSlave.Gun != null && itemSettings.itemType == chosenSlave.Gun.itemType)
         {
-            chosenSlave.LevelValue++;
+            chosenSlave.LevelValue = chosenSlave.LevelValue + itemSettings.LevelNumber;
 
             if (chosenSlave.LevelValue == chosenSlave.Gun.LevelNumber)
             {
-                chosenSlave.ListIndex++;
+                if(chosenSlave.ListIndex<chosenSlave.SwordItems.Count)
+                    chosenSlave.ListIndex++;
+
 
                 if (itemSettings.itemType == ItemType.Sword)
                 {
@@ -114,15 +116,26 @@ public class Sword : MonoBehaviour,IItem,IGun
                 chosenSlave.LevelValue = 0;
             }
         }
-        else if (chosenSlave.Gun == null)
+        else if (chosenSlave.Gun == null && itemSettings.LevelNumber == 1)
         {
-            if (itemSettings.itemType == ItemType.Sword)
+            if (itemSettings.itemType == ItemType.Sword && itemSettings.LevelNumber == 1) 
             {
                 chosenSlave.Gun = chosenSlave.SwordItems[0];
             }
 
             CoinCode.instance.TakeObject(price);
         }
+        else if (itemSettings.itemType == ItemType.Sword && itemSettings.LevelNumber > 1)
+        {
+            foreach (ItemSO i in chosenSlave.SwordItems)
+            {
+                if (i.LevelNumber == itemSettings.LevelNumber)
+                {
+                    chosenSlave.Gun = i;
+                }
+            }
+        }
+
     }
 
     public void Effect()

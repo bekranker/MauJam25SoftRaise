@@ -13,8 +13,7 @@ public class SlaveCode : MonoBehaviour
 
     public float DMG;
     public float Shield;
-   
-    
+    public float Health;
     void Update()
     {
         if(Gun != null)

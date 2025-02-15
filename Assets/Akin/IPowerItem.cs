@@ -1,4 +1,4 @@
 public interface IPowerItem 
 {
-    void PowerEffect();
+    void PowerEffect(SlaveCode slaveCode);
 }
