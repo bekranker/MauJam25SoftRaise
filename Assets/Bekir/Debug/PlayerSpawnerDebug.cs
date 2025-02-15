@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class PlayerSpawnerDebug : MonoBehaviour
 {
@@ -12,11 +10,10 @@ public class PlayerSpawnerDebug : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            PlayerTypes[] playertypes = (PlayerTypes[])Enum.GetValues(typeof(PlayerTypes));
-            SpawnPlayer(playertypes[Random.Range(0, playertypes.Length - 1)]);
+            SpawnPlayer();
         }
     }
-    public void SpawnPlayer(PlayerTypes randomPlayerType)
+    public void SpawnPlayer()
     {
         if (_playerHolder.IsAllBusy()) return;
         Player tempPlayer = Instantiate(_playerPrefab);

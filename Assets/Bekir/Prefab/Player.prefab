@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2719619945994730223}
   m_Father: {fileID: 3526636107868157871}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7185617570418590228
@@ -255,7 +256,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3757463928469426988}
-  m_Father: {fileID: 3526636107868157871}
+  m_Father: {fileID: 3071828872684653612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -356,7 +357,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3071828872684653612}
-  - {fileID: 2719619945994730223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3283890847245029852
@@ -375,5 +375,6 @@ MonoBehaviour:
   _health: 25
   _healthTMP: {fileID: 8820429447738348363}
   _attackSpeed: 0.3
+  _myIndex: 0
   _playerType: 1
   TempAttackAmount: 1

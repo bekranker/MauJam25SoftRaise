@@ -27,7 +27,8 @@ public class Holder : MonoBehaviour, IHolder
     }
     public void ShiftIndicesBack()
     {
-        if (_holdObjects.Count == 0)
+        // Eğer dictionary boşsa veya sadece bir eleman varsa, işlem yapma
+        if (_holdObjects.Count == 0 || _holdObjects.Count == 1)
             return;
 
         // Dictionary'yi geçici bir listeye kopyala
@@ -36,12 +37,29 @@ public class Holder : MonoBehaviour, IHolder
         // Dictionary'yi temizle
         _holdObjects.Clear();
 
+        // Elemanları yeni indekslerle geri ekle
         for (int i = 0; i < tempList.Count; i++)
         {
             int newKey = i;
-            // Eğer yeni indeks negatifse, elemanı en sona taşı
-            _holdObjects[newKey] = tempList[i].Value;
-            tempList[i].Value.RootGameObject.transform.position = _points[newKey].position;
+
+            // Eğer son elemansa, bir sonraki eleman yok, bu yüzden kendisini al
+            IHoldObject currentObject = tempList[(i < tempList.Count - 1) ? i + 1 : i].Value;
+
+            // Yeni indekse elemanı ekle
+            _holdObjects[newKey] = currentObject;
+
+            // RootGameObject'in pozisyonunu güncelle
+            currentObject.RootGameObject.transform.position = _points[newKey].position;
+
+            // Enemy veya Player component'lerinin indekslerini güncelle
+            if (currentObject.RootGameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.MyIndex = newKey;
+            }
+            else if (currentObject.RootGameObject.TryGetComponent<Player>(out Player player))
+            {
+                player._myIndex = newKey;
+            }
         }
     }
     /// <summary>
@@ -86,7 +104,7 @@ public class Holder : MonoBehaviour, IHolder
 
     public void SetEmpty(int index)
     {
-        if (!_holdObjects.ContainsKey(index)) return;
+        if (!_holdObjects.ContainsKey(index) || _holdObjects[index] == null) return;
 
         if (_holdObjects.Count == 1)
         {

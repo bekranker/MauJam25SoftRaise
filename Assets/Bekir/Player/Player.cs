@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IHoldObject, IDamage, IPlayer
     private AttackHandler _attackHandler;
     private Holder _playerHolder;
     private Holder _enemyHolder;
-    private int _myIndex;
+    public int _myIndex;
     public PlayerTypes _playerType;
     public int TempAttackAmount;
 
@@ -57,28 +57,30 @@ public class Player : MonoBehaviour, IHoldObject, IDamage, IPlayer
     }
     public void AttackAnimation()
     {
+        IDamage firstIDamage = _enemyHolder.GetFirstOne().GetComponent<IDamage>();
         if (_playerType == PlayerTypes.Melee)
         {
             _spriteRenderer.transform.DOMove(_gameManager.ConflictArea.position, _attackSpeed).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                _enemyHolder.GetFirstOne().GetComponent<IDamage>().Damage(TempAttackAmount);
+                firstIDamage.Damage(TempAttackAmount);
                 _spriteRenderer.transform.DOMove(_playerHolder.GetTransform(_myIndex).position, _attackSpeed).SetEase(Ease.OutBack);
             });
         }
         else if (_playerType == PlayerTypes.Archer)
         {
-            _enemyHolder.GetFirstOne().GetComponent<IDamage>().Damage(TempAttackAmount);
+            firstIDamage.Damage(TempAttackAmount);
             _spriteRenderer.transform.DOPunchPosition(Vector3.right, _attackSpeed).SetEase(Ease.OutBack);
         }
     }
 
     public void Die()
     {
-        _enemyHolder.SetEmpty(_myIndex);
+        OnMove();
     }
 
     public void OnMove()
     {
+        _enemyHolder.SetEmpty(_myIndex);
     }
     void OnDestroy()
     {

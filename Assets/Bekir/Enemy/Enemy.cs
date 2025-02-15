@@ -83,14 +83,14 @@ public class Enemy : MonoBehaviour, IDamage, IHoldObject, IEnemy
             {
                 _spriteRenderer.transform.DOMove(_gameManager.ConflictArea.position, _attackSpeed).SetEase(Ease.OutBack).OnComplete(() =>
                 {
-                    _playerHolder.GetFirstOne().GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
+                    playerIDamage.Damage(_enemySCB.AttackAmount);
                     _spriteRenderer.transform.DOMove(_enemyHolder.GetTransform(MyIndex).position, _attackSpeed).SetEase(Ease.OutBack);
                 });
             }
             else if (_enemySCB.EnemyTypes == EnemyTypes.Archer)
             {
                 _spriteRenderer.transform.DOPunchPosition(Vector3.left, _attackSpeed).SetEase(Ease.OutBack);
-                _playerHolder.GetFirstOne().GetComponent<IDamage>().Damage(_enemySCB.AttackAmount);
+                playerIDamage.Damage(_enemySCB.AttackAmount);
             }
         }
     }
